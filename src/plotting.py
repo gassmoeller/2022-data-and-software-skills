@@ -30,7 +30,7 @@ all_data = pd.read_csv("data/110-tavg-12-12-1950-2020.csv", index_col='Date', he
 all_data.info()
 all_data.to_json("results/data_output.json")
 
-print("hello world", all_data.loc['195012':'197512','Value'])
+print("Some values of our data:", all_data.loc['195012':'197512','Value'])
 
 json_data = pd.read_json("results/data_output.json")
 json_data.info()
