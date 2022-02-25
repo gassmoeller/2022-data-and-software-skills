@@ -22,7 +22,7 @@ print (processed_temperature_data)
 
 # Create a figure of the processed data
 temperature_figure = plt.figure()
-temperature_plot = plt.bar (processed_temperature_data[:,0],processed_temperature_data[:,2], width=30)
+temperature_plot = plt.bar (processed_temperature_data[:,0],processed_temperature_data[:,2], width=15)
 plt.show(block=True)
 temperature_figure.savefig('results/temperature-over-time.pdf')
 
