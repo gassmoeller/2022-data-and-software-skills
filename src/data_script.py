@@ -24,7 +24,7 @@ plt.ylabel ('Temperature (K)')
 
 temperature_figure.savefig('./temperature-over-time.pdf')
 
-all_data = pd.read_csv("processed-temperature-data2.csv", index_col='Date', header=0)
+all_data = pd.read_csv("final_processed_temps.csv", index_col='Date', header=0)
 all_data.info()
 all_data.to_json("data_output.json")
 
