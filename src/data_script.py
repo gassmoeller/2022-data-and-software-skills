@@ -18,12 +18,14 @@ temperature_figure = plt.figure()
 temperature_plot = plt.plot (processed_temperature_data[:,0],processed_temperature_data[:,2])
 plt.show(block=True)
 
+# adds labels to plot
 plt.title("Maximum Annual Temperature in Miami, Florida")
 plt.xlabel ('Date')
 plt.ylabel ('Temperature (K)')
 
 temperature_figure.savefig('./temperature-over-time.pdf')
 
+# reads the .csv file so it could be put into the .json file
 all_data = pd.read_csv("final_processed_temps.csv", index_col='Date', header=0)
 all_data.info()
 all_data.to_json("data_output.json")
