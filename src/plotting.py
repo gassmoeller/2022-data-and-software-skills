@@ -20,7 +20,7 @@ processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
 
 # Create a figure of the processed data
 temperature_figure = plt.figure()
-temperature_plot = plt.bar (processed_temperature_data[:,0],processed_temperature_data[:,2], width=40)
+temperature_plot = plt.bar (processed_temperature_data[:,0],processed_temperature_data[:,2], width=60)
 plt.show(block=True)
 temperature_figure.savefig('results/temperature-over-time.pdf')
 
@@ -34,7 +34,7 @@ print("Some values of our data:", all_data.loc['195012':'197512','Value'])
 json_data = pd.read_json("results/data_output.json")
 json_data.info()
 
-temperature_plot = plt.bar (all_data.loc[:,"Value"], height=all_data.loc[:,"Value"], width=30)
+temperature_plot = plt.bar (all_data.loc[:,"Value"], height=all_data.loc[:,"Value"], width=60)
 plt.show(block=True)
 
 
