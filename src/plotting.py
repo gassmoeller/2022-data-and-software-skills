@@ -18,7 +18,6 @@ temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
 # Append this new column to the existing temperature_data array
 processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
-print (processed_temperature_data)
 
 # Create a figure of the processed data
 temperature_figure = plt.figure()
