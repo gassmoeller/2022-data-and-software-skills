@@ -8,7 +8,6 @@ import pandas as pd
 
 # Create an array (a multi-dimensional table) out of our data file, full of text
 all_data = np.genfromtxt("data/110-tavg-12-12-1950-2020.csv", delimiter=',',skip_header=5)
-print(all_data)
 
 # Select the data range we are interested in, convert it into a new array, full of numbers
 temperature_data = np.array(all_data[5:,:], dtype=float)
