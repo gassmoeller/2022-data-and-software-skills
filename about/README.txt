@@ -1,0 +1,3 @@
+This dataset contains the maximum annual temperatures in Miami, Florida from the years 1948 to 2020. The temperatures were collected from NOAA in degrees Fahrenheit. This script converts the temperatures from Farenhenheit to Kelvin and plots the processed temperatures on a line graph.
+
+Citation: NOAA National Centers for Environmental information, Climate at a Glance: National Time Series, published February 2021, retrieved on February 19, 2021 from https://www.ncdc.noaa.gov/cag/
