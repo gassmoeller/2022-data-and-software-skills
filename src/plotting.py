@@ -6,6 +6,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+def read_data (filename, header_line = 5):
+
+    # Create an array (a multi-dimensional table) out of our data file, full of text
+    all_data = np.genfromtxt(filename, delimiter=',',skip_header=header_line)
+    print(all_data)
+
+    # Select the data range we are interested in, convert it into a new array, full of numbers
+    temperature_data = np.array(all_data[header_line:,:], dtype=float)
+
+    return temperature_data
+
 # Create an array (a multi-dimensional table) out of our data file, full of text
 all_data = np.genfromtxt("data/110-tavg-12-12-1950-2020.csv", delimiter=',',skip_header=5)
 
