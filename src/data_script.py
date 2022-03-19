@@ -7,7 +7,7 @@ all_data = np.genfromtxt("processed-temperature-data.csv", delimiter=',',skip_he
 print(all_data)
 
 temperature_data = np.array(all_data[0:,0:2], dtype=float)
-print(temperature_data)
+
 
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
