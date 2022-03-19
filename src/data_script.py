@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 all_data = np.genfromtxt("processed-temperature-data.csv", delimiter=',',skip_header=0)
-print(all_data)
+
 
 temperature_data = np.array(all_data[0:,0:2], dtype=float)
 
