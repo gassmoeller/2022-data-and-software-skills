@@ -30,25 +30,36 @@ def process_data(temperature_in_fahrenheit):
     combined_temperature_data = np.append(temperature_in_fahrenheit, temperature_kelvin,1)
     return combined_temperature_data
 
-def plot_data(combined_temperature_data):
+def plot_data(combined_temperature_data, plot_filename):
     """Create a figure of the processed data"""
     figure = plt.figure()
     plt.bar (combined_temperature_data[:,0],
                                 combined_temperature_data[:,2],
                                 width=40)
     plt.show(block=True)
-    figure.savefig('results/temperature-over-time.pdf')
+    figure.savefig(plot_filename)
 
-def csv_to_json(filename):
+def csv_to_json(filename, output_filename):
     """Convert a csv file named 'filename' to json."""
     all_data = pd.read_csv(filename, index_col='Date', header=4)
     all_data.info()
-    all_data.to_json("results/data_output.json")
+    all_data.to_json(output_filename)
     print("Some values of our data:", all_data.loc['195012':'197512','Value'])
 
 def plot():
     """Main plotting function."""
-    temperature_data = read_data("data/110-tavg-12-12-1950-2020.csv")
+    current_file_location = os.path.dirname(__file__)
+
+    data_directory = os.path.join(current_file_location,
+                                        "..",
+                                        "data")
+    results_directory = os.path.join(current_file_location,
+                                        "..",
+                                        "results")
+
+    input_data_filename = os.path.join(data_directory,
+                                        "110-tavg-12-12-1950-2020.csv")
+    temperature_data = read_data(input_data_filename)
 
     assert temperature_data.shape == (71,3), \
         "Unexpected size of array. Array size: " + str(temperature_data.shape)
@@ -62,18 +73,26 @@ def plot():
     assert np.all(test_output == test_expected_output), \
         "The process_data function returned an unexpected result."
 
-    if os.path.exists('results/temperature-over-time.pdf'):
-        os.remove('results/temperature-over-time.pdf')
+    plot_filename = os.path.join(results_directory,
+                                        "temperature-over-time.pdf")
 
-    plot_data(processed_temperature_data)
+    if os.path.exists(plot_filename):
+        os.remove(plot_filename)
 
-    assert os.path.exists('results/temperature-over-time.pdf')
+    plot_data(processed_temperature_data, plot_filename)
 
-    conversion_filename = "data/110-tavg-12-12-1950-2020.csv"
-    json_filename = "results/data_output.json"
-    csv_to_json(conversion_filename)
+    assert os.path.exists(plot_filename)
+
+    conversion_filename = os.path.join(data_directory,
+                                        "110-tavg-12-12-1950-2020.csv")
+    json_filename = os.path.join(results_directory,
+                                        "data_output.json")
+    csv_to_json(conversion_filename, json_filename)
 
     input_data = pd.read_csv(conversion_filename, index_col='Date', header=4)
     converted_data = pd.read_json(json_filename)
     assert input_data.info() is converted_data.info(), \
         "Error during conversion."
+
+if __name__ == "__main__":
+    plot()
