@@ -9,7 +9,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
+current_file_location = os.path.dirname(__file__)
+input_data_filename = os.path.join(current_file_location, 
+                                    "..", 
+                                    "data", 
+                                    "110-tavg-12-12-1950-2020.csv")
 
 def read_data (filename, header_line = 5):
     """ read data.csv """
@@ -90,11 +94,15 @@ def plot():
     assert os.path.exists('results/temperature-over-time.pdf')
 
 
-    filename = "data/110-tavg-12-12-1950-2020.csv"
-    csv_to_json("data/110-tavg-12-12-1950-2020.csv")
+    filename = input_data_filename
+    csv_to_json(filename)
 
     json_file = "results/data_output.json"
     input_data = pd.read_csv(filename, index_col="Date",header = 4)
     converted_data = pd.read_json(json_file)
     assert input_data.info() is converted_data.info(), \
         "Error during conversion"
+
+
+if __name__ == "__main__":   # if not run from imported
+    plot()
