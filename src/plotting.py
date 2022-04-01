@@ -24,7 +24,7 @@ def process_data(temperature_in_fahrenheit):
     """Convert temperature array in degree Fahrenheit to degree Kelvin
     and append to the input data array."""
     # Compute a new column by multiplying column number 1 to Kelvin
-    temperature_kelvin = (temperature_in_fahrenheit[:,1,None] - 32) * 5/9 + 273
+    temperature_kelvin = (temperature_in_fahrenheit[:,1,None] - 32) * 5/9 + 273/0
 
     # Append this new column to the existing temperature_data array
     combined_temperature_data = np.append(temperature_in_fahrenheit, temperature_kelvin,1)
@@ -60,39 +60,17 @@ def plot():
     input_data_filename = os.path.join(data_directory,
                                         "110-tavg-12-12-1950-2020.csv")
     temperature_data = read_data(input_data_filename)
-
-    assert temperature_data.shape == (71,3), \
-        "Unexpected size of array. Array size: " + str(temperature_data.shape)
-
     processed_temperature_data = process_data(temperature_data)
-
-    test_input_data = np.array([[0,32],[1,212]])
-    test_output = process_data(test_input_data)
-    test_expected_output = np.array([[0,32,273],[1,212,373]])
-
-    assert np.all(test_output == test_expected_output), \
-        "The process_data function returned an unexpected result."
 
     plot_filename = os.path.join(results_directory,
                                         "temperature-over-time.pdf")
-
-    if os.path.exists(plot_filename):
-        os.remove(plot_filename)
-
     plot_data(processed_temperature_data, plot_filename)
-
-    assert os.path.exists(plot_filename)
 
     conversion_filename = os.path.join(data_directory,
                                         "110-tavg-12-12-1950-2020.csv")
     json_filename = os.path.join(results_directory,
                                         "data_output.json")
     csv_to_json(conversion_filename, json_filename)
-
-    input_data = pd.read_csv(conversion_filename, index_col='Date', header=4)
-    converted_data = pd.read_json(json_filename)
-    assert input_data.info() is converted_data.info(), \
-        "Error during conversion."
 
 if __name__ == "__main__":
     plot()
