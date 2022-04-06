@@ -24,7 +24,7 @@ def process_data(temperature_in_fahrenheit):
     """Convert temperature array in degree Fahrenheit to degree Kelvin
     and append to the input data array."""
     # Compute a new column by multiplying column number 1 to Kelvin
-    temperature_kelvin = (temperature_in_fahrenheit[:,1,None] - 32) * 5/9 + 273/0
+    temperature_kelvin = (temperature_in_fahrenheit[:,1,None] - 32) * 5/9 + 273
 
     # Append this new column to the existing temperature_data array
     combined_temperature_data = np.append(temperature_in_fahrenheit, temperature_kelvin,1)
