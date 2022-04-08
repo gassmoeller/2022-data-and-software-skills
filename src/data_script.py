@@ -3,20 +3,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-all_data = np.genfromtxt("original-temperature-data.csv", delimiter=',',skip_header=0)
-
+dataset = pd.read_csv('/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/temperature_data.csv')
+all_data = np.genfromtxt("temperature_data.csv", delimiter=',',skip_header=0)
 print(all_data)
 
 temperature_data = np.array(all_data[0:,0:2], dtype=float)
-
+print(temperature_data)
 
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
-original_temperature_data = np.append(temperature_data, temperature_kelvin,1)
-print (original_temperature_data)
+processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
+print (processed_temperature_data)
 
 temperature_figure = plt.figure()
-temperature_plot = plt.plot (original_temperature_data[:,0],original_temperature_data[:,2])
+temperature_plot = plt.plot (processed_temperature_data[:,0],processed_temperature_data[:,2])
 plt.show(block=True)
 
 # adds labels to plot
@@ -38,5 +38,5 @@ json_data.info()
 
 print(json_data.loc['194812':'202012','Temperature (K)'])
 
-temperature_plot = plt.plot (original_temperature_data[:,0],original_temperature_data[:,2])
+temperature_plot = plt.plot (processed_temperature_data[:,0],processed_temperature_data[:,2])
 plt.show(block=True)
