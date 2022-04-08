@@ -5,7 +5,6 @@
 import sys
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 sys.path.append(os.path.join(
@@ -15,9 +14,12 @@ sys.path.append(os.path.join(
 from src import plotting
 
 def test_plot():
+    """This test runs the plot() function and makes sure it does not crash."""
     plotting.plot()
 
 def test_read_data():
+    """This test runs the read_data() function and makes
+       sure the read data has the correct size."""
     current_file_location = os.path.dirname(__file__)
     data_directory = os.path.join(current_file_location,
                                         "..",
@@ -30,6 +32,8 @@ def test_read_data():
         "Unexpected size of array. Array size: " + str(temperature_data.shape)
 
 def test_process_data():
+    """This test runs the process_data() function and makes
+    sure it converts temperatures correctly."""
     test_input_data = np.array([[0,32],[1,212]])
     test_output = plotting.process_data(test_input_data)
     test_expected_output = np.array([[0,32,273],[1,212,373]])
@@ -38,6 +42,8 @@ def test_process_data():
         "The process_data function returned an unexpected result."
 
 def test_plot_data():
+    """This test runs the plot_data() function and makes
+    sure it creates a plot file."""
     current_file_location = os.path.dirname(__file__)
     results_directory = os.path.join(current_file_location,
                                         "..",
@@ -54,6 +60,8 @@ def test_plot_data():
     assert os.path.exists(plot_filename)
 
 def test_csv_to_json():
+    """This test runs the csv_to_json() function and makes
+    sure the converted data is the same as the original data."""
     current_file_location = os.path.dirname(__file__)
 
     data_directory = os.path.join(current_file_location,
@@ -72,3 +80,4 @@ def test_csv_to_json():
     converted_data = pd.read_json(json_filename)
     assert input_data.info() is converted_data.info(), \
         "Error during conversion."
+        
