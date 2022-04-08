@@ -28,6 +28,14 @@ def process_data(temperature_in_fahrenheit):
     combined_temperature_data = np.append(temperature_in_fahrenheit, temperature_kelvin,1)
     return combined_temperature_data
 
+def plot_data(combined_temperature_data, plot_filename):
+    """Figure for new processed data"""
+    figure = plt.figure()
+    plt.plot (combined_temperature_data[:,0],
+                    combined_temperature_data[:,2])
+    plt.show(block=True)
+    figure.savefig(plot_filename)
+
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
 processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
