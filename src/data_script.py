@@ -1,14 +1,8 @@
 #!/bin/python
-
-import sys
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
-all_data = np.genfromtxt("/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/temperature_data.csv", delimiter=',',skip_header=0)
-
-temperature_data = np.array(all_data[0:,0:2], dtype=float)
 
 def read_data(filename, header_lines=0):
     """Read data from a .csv data filed named 'filename', skipping
@@ -36,6 +30,44 @@ def plot_data(combined_temperature_data, plot_filename):
     plt.show(block=True)
     figure.savefig(plot_filename)
 
+temperature_data = read_data("data/temperature_data.csv")
+processed_temperature_data = process_data(temperature_data)
+
+def csv_to_json(filename, output_filename):
+    """Convert a csv file named 'filename' to json"""
+    all_data = pd.read_csv(filename, index_col='Date', header=4)
+    all_data.info()
+    all_data.to_json(output_filename)
+
+def plot():
+    """Plotting function"""
+    current_file_location = os.path.dirname(__file__)
+
+    data_directory = os.path.join(current_file_location,
+                                        "..",
+                                        "data")
+    results_directory = os.path.join(current_file_location,
+                                        "..",
+                                        "results")
+
+    input_data_filename = os.path.join(data_directory,
+                                        "temperature_data.csv")
+
+    temperature_data = read_data(input_data_filename)
+
+    processed_temeprature_data = process_data(temperature_data)
+
+    plot_filename = os.path.join(results_directory,
+                                        "temperature-over-time.pdf")
+
+    plot_data(processed_temperature_data, plot_filename)
+
+    conversion_filename = os.path.join(data_directory,
+                                        "temperature_data.csv")
+    json_filename = os.path.join(results_directory,
+                                        "data_output.json")
+    csv_to_json(conversion_filename, json_filename)
+
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
 processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
@@ -49,20 +81,6 @@ plt.show(block=True)
 plt.title("Maximum Annual Temperature in Miami, Florida")
 plt.xlabel ('Date')
 plt.ylabel ('Temperature (K)')
-
-temperature_figure.savefig('./temperature-over-time.pdf')
-
-# reads the .csv file so it could be put into the .json file
-all_data = pd.read_csv("/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/final_processed_temps.csv", index_col='Date', header=0)
-all_data.info()
-all_data.to_json("data_output.json")
-
-print(all_data.loc['194812':'202012','Temperature (K)'])
-
-json_data = pd.read_json("data_output.json")
-json_data.info()
-
-print(json_data.loc['194812':'202012','Temperature (K)'])
 
 temperature_plot = plt.plot (processed_temperature_data[:,0],processed_temperature_data[:,2])
 plt.show(block=True)
