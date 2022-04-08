@@ -12,7 +12,7 @@ temperature_data = np.array(all_data[0:,0:2], dtype=float)
 
 def read_data(filename, header_lines=0):
     """Read data from a .csv data filed named 'filename', skipping
-    the first 'header_lines' lines. Return the data as a Numpy array"""
+    the first 'header_lines'. Return the data as a Numpy array so it could be read as numbers."""
    
     text_data = np.genfromtxt(filename, delimiter=',',skip_header=header_lines)
 
