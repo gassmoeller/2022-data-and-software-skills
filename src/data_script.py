@@ -7,10 +7,17 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 all_data = np.genfromtxt("/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/temperature_data.csv", delimiter=',',skip_header=0)
-print(all_data)
 
 temperature_data = np.array(all_data[0:,0:2], dtype=float)
-print(temperature_data)
+
+def read_data(filename, header_lines=0):
+    """Read data from a .csv data filed named 'filename', skipping
+    the first 'header_lines' lines. Return the data as a Numpy array"""
+   
+    text_data = np.genfromtxt(filename, delimiter=',',skip_header=header_lines)
+
+    data = np.array(text_data[0:,0:2], dtype=float)
+    return data
 
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
