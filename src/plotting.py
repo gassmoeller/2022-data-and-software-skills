@@ -3,7 +3,7 @@
 """This module contains functions to read and plot temperature data."""
 
 # Import the libraries we are using. It is good practice to import all necessary
-# libraries in the first lines of a file.
+# libraries in the first lines of a file. Improve this message.
 import os
 import numpy as np
 import matplotlib.pyplot as plt
