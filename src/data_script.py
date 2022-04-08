@@ -19,6 +19,15 @@ def read_data(filename, header_lines=0):
     data = np.array(text_data[0:,0:2], dtype=float)
     return data
 
+def process_data(temperature_in_fahrenheit):
+    '''Convert temperature array in degree Farenheit to
+    degree Kelvin and append to the input data array so all the data is together.'''
+    
+    temperature_kelvin = (temperature_in_fahrenheit[:,1,None] - 32) * 5/9 + 273
+
+    combined_temperature_data = np.append(temperature_in_fahrenheit, temperature_kelvin,1)
+    return combined_temperature_data
+
 temperature_kelvin = (temperature_data[:,1,None] - 32) * 5/9 + 273
 
 processed_temperature_data = np.append(temperature_data, temperature_kelvin,1)
@@ -36,7 +45,7 @@ plt.ylabel ('Temperature (K)')
 temperature_figure.savefig('./temperature-over-time.pdf')
 
 # reads the .csv file so it could be put into the .json file
-all_data = pd.read_csv("final_processed_temps.csv", index_col='Date', header=0)
+all_data = pd.read_csv("/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/final_processed_temps.csv", index_col='Date', header=0)
 all_data.info()
 all_data.to_json("data_output.json")
 
