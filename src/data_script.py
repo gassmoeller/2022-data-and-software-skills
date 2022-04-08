@@ -1,10 +1,10 @@
 #!/bin/python
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv('/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/temperature_data.csv')
-all_data = np.genfromtxt("temperature_data.csv", delimiter=',',skip_header=0)
+all_data = np.genfromtxt("/Users/ashleyd/Desktop/2022-data/returned_assignments/dann_a7/data/temperature_data.csv", delimiter=',',skip_header=0)
 print(all_data)
 
 temperature_data = np.array(all_data[0:,0:2], dtype=float)
