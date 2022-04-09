@@ -1,4 +1,6 @@
 #!/bin/python
+
+import sys
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -84,3 +86,6 @@ plt.ylabel ('Temperature (K)')
 
 temperature_plot = plt.plot (processed_temperature_data[:,0],processed_temperature_data[:,2])
 plt.show(block=True)
+
+if __name__ == "__main__":
+    plot()
