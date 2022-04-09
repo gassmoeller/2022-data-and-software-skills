@@ -1,3 +1,3 @@
-from src import plotting
+from src import data_script
 
-plotting.plot()
+data_script.plot()
