@@ -14,4 +14,5 @@ sys.path.append(os.path.join(
 
 from src import data_script
 
-data_script.plot()
+def test_plot():
+    data_script.plot()
