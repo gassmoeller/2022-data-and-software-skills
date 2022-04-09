@@ -37,7 +37,7 @@ processed_temperature_data = process_data(temperature_data)
 
 def csv_to_json(filename, output_filename):
     """Convert a csv file named 'filename' to json"""
-    all_data = pd.read_csv(filename, index_col='Date', header=4)
+    all_data = pd.read_csv(filename, index_col='Date', header=0)
     all_data.info()
     all_data.to_json(output_filename)
 
