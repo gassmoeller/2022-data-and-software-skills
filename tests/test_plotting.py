@@ -13,7 +13,3 @@ sys.path.append(os.path.join(
     ".."))
 
 from src import data_script
-
-def test_plot(): 
-    assert 1 == 0
-    plotting
